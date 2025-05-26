@@ -1,14 +1,19 @@
 <template>
-  <header class="bg-gray-200 text-white p-4 shadow-md ">
+<header class="sticky top-0 z-[1000] bg-gray-200 text-white p-4 shadow-md">
     <div class="flex items-center justify-between">
       <NuxtLink to="/" class="text-lg text-black font-bold">Autofix AS</NuxtLink>
+
       <div class="relative">
         <button @click="toggleDropdown" class="bg-gray-300 font-semibold text-black p-2 rounded-lg hover:bg-gray-400 focus:outline-none">
           {{ authStore.user?.name || 'Menu' }}
         </button>
-        <div v-if="isDropdownOpen" class="absolute right-0 mt-2 bg-white text-black rounded-md shadow-lg w-48">
+
+        <!-- DROPDOWN FIXED: add z-[1001] -->
+        <div
+          v-if="isDropdownOpen"
+          class="absolute right-0 mt-2 bg-white text-black rounded-md shadow-lg w-48 z-[1001]"
+        >
           <ul>
-            <!-- Show Login/Register if the user is not authenticated -->
             <li v-if="!authStore.token">
               <a href="/login" class="flex items-center px-4 py-3 pt-3 hover:bg-gray-100">
                 <LucideLogIn class="w-5 h-5 mr-2" /> Log in
@@ -19,8 +24,6 @@
                 <LucideUserPlus class="w-5 h-5 mr-2" /> Register
               </a>
             </li>
-
-            <!-- Show Dashboard, Profile, Admin, Logout if authenticated -->
             <li v-if="authStore.token">
               <a href="/dashboard" class="flex items-center px-4 py-2 pt-3 hover:bg-gray-100">
                 <LucideLayoutDashboard class="w-5 h-5 mr-2" /> Dashboard
@@ -36,7 +39,6 @@
                 <LucideUser class="w-5 h-5 mr-2" /> Profile
               </a>
             </li>
-            <!-- <hr> -->
             <li v-if="authStore.token">
               <a @click="logout" href="/login" class="flex items-center px-4 py-2 pb-3 text-red-600 hover:bg-gray-100">
                 <LucideLogOut class="w-5 h-5 mr-2" /> Log Out
@@ -48,6 +50,7 @@
     </div>
   </header>
 </template>
+
 
 <script setup>
 import { ref, onMounted } from 'vue'

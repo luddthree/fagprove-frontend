@@ -1,97 +1,96 @@
 <template>
-    <div class="max-w-md mx-auto mt-10">
-      <h1 class="text-2xl font-bold mb-4">Register</h1>
-      <form @submit.prevent="register">
-        <div class="mb-4">
-          <label for="name" class="block text-sm font-medium">Name</label>
-          <input
-            id="name"
-            v-model="form.name"
-            type="text"
-            class="w-full border rounded-md p-2"
-            placeholder="Enter your name"
-          />
+  <div class="min-h-screen bg-gray-100 flex flex-col">
+
+
+    <div class="flex-1 flex mt-20 justify-center">
+      <div class="w-full max-w-2xl ">
+        <div class="text-center mb-6">
+          <h1 class="text-4xl font-bold mb-2">Registrer bruker</h1>
+          <p class="text-gray-600 text-sm">
+            Register bruker for å få tilgang til dashboardet her du kan bestille verkstedtime og registerer kjøretøy hos Autofix AS. 
+          </p>
         </div>
-        <div class="mb-4">
-          <label for="email" class="block text-sm font-medium">Email</label>
-          <input
-            id="email"
-            v-model="form.email"
-            type="email"
-            class="w-full border rounded-md p-2"
-            placeholder="Enter your email"
-          />
-        </div>
-        <div class="mb-4">
-          <label for="password" class="block text-sm font-medium">Password</label>
-          <input
-            id="password"
-            v-model="form.password"
-            type="password"
-            class="w-full border rounded-md p-2"
-            placeholder="Enter your password"
-          />
-        </div>
-        <div class="mb-4">
-          <label for="password_confirmation" class="block text-sm font-medium">Confirm Password</label>
-          <input
-            id="password_confirmation"
-            v-model="form.password_confirmation"
-            type="password"
-            class="w-full border rounded-md p-2"
-            placeholder="Confirm your password"
-          />
-        </div>
-        <!-- <div class="mb-4">
-          <label for="role" class="block text-sm font-medium">Role</label>
-          <select id="role" v-model="form.role" class="w-full border rounded-md p-2">
-            <option value="admin">Admin</option>
-            <option value="user">User</option>
-          </select>
-        </div> -->
-        <button type="submit" class="w-full bg-orange-600 text-white rounded-md p-2">Register</button>
-      </form>
-      <div v-if="error" class="text-red-500 mt-4">{{ error }}</div>
-      <div>
-        <p></p><a href="/login" class="text-gray-800 mt-3">Already a user? Log in here.</a>
+
+        <form @submit.prevent="register" class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold mb-1">Navn</label>
+            <input v-model="form.name" type="text" class="w-full border rounded-md p-2" placeholder="Navn" />
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold mb-1">E-post</label>
+            <input v-model="form.email" type="email" class="w-full border rounded-md p-2" placeholder="E-post" />
+          </div>
+
+          <div class="flex flex-col md:flex-row gap-4">
+            <div class="flex-1">
+              <label class="block text-xs font-bold mb-1">Passord</label>
+              <input v-model="form.password" type="password" class="w-full border rounded-md p-2" placeholder="Passord" />
+            </div>
+            <div class="flex-1">
+              <label class="block text-xs font-bold mb-1">Gjennta passord</label>
+              <input v-model="form.password_confirmation" type="password" class="w-full border rounded-md p-2" placeholder="Gjennta passord" />
+            </div>
+          </div>
+
+          <div class="flex items-start gap-2">
+            <input type="checkbox" id="terms" v-model="agreed" class="mt-1 accent-orange-600" />
+            <label for="terms" class="text-sm text-gray-700">
+             Trykk her for å godkjenne våre <a href="#" class="text-orange-600 underline">Medlems vilkår</a>
+            </label>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-orange-600 hover:bg-orange-700 transition-colors text-white font-semibold p-3 rounded-md"
+            :disabled="!agreed"
+          >
+            Registrer
+          </button>
+        </form>
+
+        <div v-if="error" class="text-red-500 mt-4 text-sm text-center">{{ error }}</div>
       </div>
     </div>
-  </template>
-  
-  <script setup>
-  import { ref } from 'vue'
-  
-  // Definerer skjema-data som brukeren fyller ut
-  const form = ref({
-    name: '',
-    email: '',
-    password: '',
-    password_confirmation: '',
-    role: 'user' // Standard rolle som "user"
-  })
-  
-  // Brukes for å vise feilmeldinger
-  const error = ref(null)
-  
-  // Funksjon for å registrere bruker via Laravel API
-  async function register() {
-    try {
-      const response = await $fetch('/api/register', {
-        baseURL: useRuntimeConfig().public.apiBase, 
-        method: 'POST', 
-        body: form.value, 
-      })
-      alert('User registered successfully!') 
-      console.log(response) 
-    } catch (err) {
-      error.value = err?.data?.message || 'An error occurred.' 
-      console.error(err) 
-      console.log(form.value) 
-    }
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+const form = ref({
+  name: '',
+  email: '',
+  password: '',
+  password_confirmation: '',
+})
+
+const agreed = ref(false)
+const error = ref(null)
+
+const router = useRouter()
+
+async function register() {
+  try {
+    const response = await $fetch('/api/register', {
+      baseURL: useRuntimeConfig().public.apiBase,
+      method: 'POST',
+      body: form.value,
+    })
+
+    alert('Bruker registrert!')
+    console.log(response)
+
+    // ✅ Redirect to login page
+    router.push('/login')
+  } catch (err) {
+    error.value = err?.data?.message || 'En feil oppstod.'
+    console.error(err)
   }
-  </script>
-  
-  
-  <style scoped>
-  </style>
-  
+}
+</script>
+
+
+<style scoped>
+</style>
