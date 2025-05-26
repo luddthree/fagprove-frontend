@@ -1,13 +1,11 @@
 <template>
-  <div class="min-h-screen bg-gray-100 flex flex-col">
-
-
-    <div class="flex-1 flex mt-20 justify-center">
-      <div class="w-full max-w-2xl ">
+  <div class="min-h-screen bg-gray-100 flex flex-col px-4">
+    <div class="flex-1 flex justify-center mt-10 md:mt-20">
+      <div class="w-full max-w-2xl">
         <div class="text-center mb-6">
           <h1 class="text-4xl font-bold mb-2">Registrer bruker</h1>
           <p class="text-gray-600 text-sm">
-            Register bruker for å få tilgang til dashboardet her du kan bestille verkstedtime og registerer kjøretøy hos Autofix AS. 
+            Registrer bruker for å få tilgang til dashboardet hvor du kan bestille verkstedtime og registrere kjøretøy hos Autofix AS.
           </p>
         </div>
 
@@ -28,15 +26,15 @@
               <input v-model="form.password" type="password" class="w-full border rounded-md p-2" placeholder="Passord" />
             </div>
             <div class="flex-1">
-              <label class="block text-xs font-bold mb-1">Gjennta passord</label>
-              <input v-model="form.password_confirmation" type="password" class="w-full border rounded-md p-2" placeholder="Gjennta passord" />
+              <label class="block text-xs font-bold mb-1">Gjenta passord</label>
+              <input v-model="form.password_confirmation" type="password" class="w-full border rounded-md p-2" placeholder="Gjenta passord" />
             </div>
           </div>
 
           <div class="flex items-start gap-2">
             <input type="checkbox" id="terms" v-model="agreed" class="mt-1 accent-orange-600" />
             <label for="terms" class="text-sm text-gray-700">
-             Trykk her for å godkjenne våre <a href="#" class="text-orange-600 underline">Medlems vilkår</a>
+              Trykk her for å godkjenne våre <a href="#" class="text-orange-600 underline">Medlemsvilkår</a>
             </label>
           </div>
 
@@ -50,6 +48,10 @@
         </form>
 
         <div v-if="error" class="text-red-500 mt-4 text-sm text-center">{{ error }}</div>
+
+        <div class="mt-4 text-center">
+          <a href="/login" class="text-sm text-gray-800 hover:underline">Har du allerede en konto? Logg inn her.</a>
+        </div>
       </div>
     </div>
   </div>

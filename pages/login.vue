@@ -1,13 +1,12 @@
 <template>
-  <div class="min-h-screen bg-gray-100 flex flex-col">
-    <div class="flex-1 flex mt-20 justify-center">
+  <div class="min-h-screen bg-gray-100 flex flex-col px-4">
+    <div class="flex-1 flex justify-center mt-10 md:mt-20">
       <div class="w-full max-w-2xl">
         <div class="text-center mb-6">
           <h1 class="text-4xl font-bold mb-2">Logg inn</h1>
           <p class="text-gray-600 text-sm">
             Logg inn for å få tilgang til dashbordet hvor du kan bestille verkstedtime og administrere kjøretøy hos Autofix AS.
           </p>
-  
         </div>
 
         <form @submit.prevent="login" class="space-y-4">
@@ -38,6 +37,7 @@
     </div>
   </div>
 </template>
+
   
 <script setup>
 import { ref } from 'vue'
