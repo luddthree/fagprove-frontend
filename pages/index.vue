@@ -8,7 +8,7 @@ definePageMeta({
     <!-- Gråtonet bakgrunnsbilde -->
     <div class="absolute inset-0 z-0">
       <img
-        src="/public/lokalet.png"
+        src="/public/lokalet.webp"
         alt="Autofix AS"
         class="w-full h-full object-cover opacity-30"
       />
