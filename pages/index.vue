@@ -31,7 +31,6 @@ definePageMeta({
         </NuxtLink>
       </div>
 
-      <!-- Dashboard preview info -->
 
     </div>
 

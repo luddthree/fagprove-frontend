@@ -1,3 +1,7 @@
+# Autofix AS
+Dette er en kundeportal for Autofix AS. En digitalisert løsning for kundehåntering og timebestillinger.
+Innstallering ser du nedenfor:
+
 # Nuxt Minimal Starter
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.

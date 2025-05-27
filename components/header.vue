@@ -7,8 +7,7 @@
         <button @click="toggleDropdown" class="bg-gray-300 font-semibold text-black p-2 rounded-lg hover:bg-gray-400 focus:outline-none">
           {{ authStore.user?.name || 'Menu' }}
         </button>
-
-        <!-- DROPDOWN FIXED: add z-[1001] -->
+        <!-- header viser forskjellige items ved bruk av v-if innebygd nuxt funksjon -->
         <div
           v-if="isDropdownOpen"
           class="absolute right-0 mt-2 bg-white text-black rounded-md shadow-lg w-48 z-[1001]"

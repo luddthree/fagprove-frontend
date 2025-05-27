@@ -78,7 +78,7 @@ export const useAuthStore = defineStore('auth', {
     }
     ,
 
-    // henter bruker
+    // sjekker om bruker er innlogget
     async initialize() {
       console.log('Initializing auth store') 
     
@@ -86,7 +86,6 @@ export const useAuthStore = defineStore('auth', {
         const storedToken = localStorage.getItem('auth_token')
         console.log('Token found in localStorage:', storedToken) 
     
-        // Always set the token if available (even on public routes)
         if (storedToken) {
           this.token = storedToken
           await this.fetchUser().catch(() => {
@@ -96,8 +95,8 @@ export const useAuthStore = defineStore('auth', {
           })
           return
         }
-    
-        // If no token, only redirect when visiting a protected route
+        
+        // routes alle kan gå inn på 
         const publicRoutes = ['/', '/register', '/login']
         const currentRoute = window.location.pathname
     

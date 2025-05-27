@@ -60,7 +60,6 @@ export const useAppointmentStore = defineStore('appointment', {
           }
         })
 
-        // Update local store state (optional, since you're calling fetchEverything)
         this.appointments = this.appointments.filter(a => a.id !== id)
       } catch (error) {
         console.error('Failed to delete appointment:', error)
@@ -93,7 +92,6 @@ await $fetch(`/api/admin/appointments/${id}/complete`, {
 })
 
 
-    // Optional: refresh the list or locally update the status
     const appointment = this.appointments.find(a => a.id === id)
     if (appointment) {
       appointment.status = 1

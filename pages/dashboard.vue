@@ -15,12 +15,11 @@
 definePageMeta({
   middleware: 'auth'
 })
-import dashboardInfo from '~/components/dashboardInfo.vue'
+// import dashboardInfo from '~/components/dashboardInfo.vue'
 import vehicles from '~/components/vehicles.vue'
 import appointments from '~/components/appointments.vue'
 
 
-// import createdTask from '~/components/createdTask.vue'
 
 
 </script>
